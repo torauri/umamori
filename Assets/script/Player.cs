@@ -7,13 +7,18 @@ public class Player : MonoBehaviour {
 	public float jumpPower = 700;
 	public LayerMask groundLayer;
 	public GameObject mainCamera;
+	public GameObject[] hudas;
+	private int hudaNum;
 	private Rigidbody2D rigidbody2D;
 	private Animator anim;
 	private bool isGrounded;
 	private Vector3 cameraTarget;
+	private float v;
 
 	void Start () {
 		rigidbody2D = GetComponent<Rigidbody2D>();
+		v=1;
+		hudaNum=0;
 		//カメラ初期化
 		cameraTarget = transform.position;
 		cameraTarget.x = cameraTarget.x+4;
@@ -30,12 +35,25 @@ public class Player : MonoBehaviour {
 		if (Input.GetKeyDown ("space")) {
 			//着地していた時、
 			if (isGrounded) {
-				//Dashアニメーションを止めて、Jumpアニメーションを実行
 				//着地判定をfalse
 				isGrounded = false;
 				//AddForceにて上方向へ力を加える
 				rigidbody2D.AddForce (Vector2.up * jumpPower);
 			}
+		}
+		if(Input.GetKeyDown("f")){
+			foreach( Transform child in transform ) {
+				child.gameObject.GetComponent<Huda>().hudaShot(v/2);
+			}
+		}
+		if(Input.GetKeyDown("g")){
+			hudaNum=(hudaNum+1)%hudas.Length;
+			foreach( Transform child in transform ) {
+				Destroy(child.gameObject);
+			}
+		}
+		if(this.transform.childCount==0){
+			hudaSummon();
 		}
 
 	}
@@ -45,6 +63,7 @@ public class Player : MonoBehaviour {
 	{
 		float x = Input.GetAxisRaw ("Horizontal");
 		if (x != 0) {
+			v=x;
 			rigidbody2D.velocity = new Vector2 (x * speed, rigidbody2D.velocity.y);
 
 			if (x>0) {
@@ -63,5 +82,18 @@ public class Player : MonoBehaviour {
 		cameraPos.x = cameraPos.x + (cameraTarget.x-cameraPos.x)/20;
 		cameraPos.y = transform.position.y+3;
 		mainCamera.transform.position = cameraPos;
+	}
+
+	void hudaSummon(){
+		for(float i=-0.2f;i<=0.2f;i+=0.4f){
+			for(float j=-0.2f;j<=0.2f;j+=0.4f){
+				Vector2 pos = new Vector2(i,j+10);
+				// プレハブからインスタンスを生成
+				GameObject obj = (GameObject)Instantiate(hudas[hudaNum], transform.position, Quaternion.identity);
+				// 作成したオブジェクトを子として登録
+				obj.transform.SetParent(transform, false);
+				obj.transform.localPosition=pos;
+			}
+		}
 	}
 }
