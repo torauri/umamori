@@ -46,8 +46,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\script\Huda.cs" />
-     <Compile Include="Assets\script\Player.cs" />
+     <Compile Include="Assets\script\Doll.cs" />
+     <Compile Include="Assets\script\Doller.cs" />
+     <Compile Include="Assets\script\Enemy.cs" />
+     <Compile Include="Assets\script\Koumori.cs" />
+     <Compile Include="Assets\script\Koumori_attack.cs" />
+     <Compile Include="Assets\script\Sharin.cs" />
+     <Compile Include="Assets\script\Sharin_attack.cs" />
+     <Compile Include="Assets\script\Stone.cs" />
+     <Compile Include="Assets\script\Tama.cs" />
+     <Compile Include="Assets\script\Touzoku.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
