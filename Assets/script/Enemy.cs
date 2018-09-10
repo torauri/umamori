@@ -7,9 +7,11 @@ public class Enemy : MonoBehaviour {
 	
 	public int HP;
 	private int hp;
+	private float barmax;
 
 	void Start(){
 		hp=HP;
+		barmax=transform.FindChild ("Enemy_HP_Bar").gameObject.transform.localScale.x;
 	}
 
 	void OnTriggerEnter2D(Collider2D other){
@@ -21,7 +23,7 @@ public class Enemy : MonoBehaviour {
 	}
 	public void Enemy_Damage(int d){
 		hp-=d;
-		transform.FindChild ("Enemy_HP_Bar").gameObject.transform.localScale=new Vector2(hp/(float)HP,1f);
+		transform.FindChild ("Enemy_HP_Bar").gameObject.transform.localScale=new Vector2((hp/(float)HP)*barmax,1f);
 		if(hp<=0){
 			Destroy(this.gameObject);
 		}

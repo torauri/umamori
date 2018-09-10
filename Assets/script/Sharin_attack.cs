@@ -14,6 +14,9 @@ public class Sharin_attack : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+		if (Mathf.Approximately(Time.timeScale, 0f)) {
+			return;
+		}
 		Vector2 pos = transform.position;
 		pos.x+=sharin_attack_speed*Mathf.Sin(rad);
 		pos.y+=sharin_attack_speed*Mathf.Cos(rad);
@@ -23,7 +26,7 @@ public class Sharin_attack : MonoBehaviour {
 			Destroy(this.gameObject);
 		}
 	}
-	void OnCollisionEnter2D(Collision2D other){
+	void OnTriggerEnter2D(Collider2D other){
 		if(other.gameObject.tag=="Doll"){
 			other.gameObject.GetComponent<Doll>().Doll_Damage(1);
 			Destroy(this.gameObject);

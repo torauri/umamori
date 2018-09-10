@@ -14,6 +14,7 @@ public class Touzoku : MonoBehaviour {
 	private bool isGrounded;
 	private Vector3 cameraTarget;
 	private float v;
+	
 
 
 	void Start () {
@@ -29,6 +30,9 @@ public class Touzoku : MonoBehaviour {
 //********** 開始 **********//
 	void Update ()
 	{
+		if (Mathf.Approximately(Time.timeScale, 0f)) {
+			return;
+		}
 		//Linecastでユニティちゃんの足元に地面があるか判定
 		isGrounded = Physics2D.Linecast (
 		transform.position + transform.up * 200,
@@ -58,6 +62,7 @@ public class Touzoku : MonoBehaviour {
 		float x = Input.GetAxisRaw ("Horizontal");
 		if (x != 0) {
 			anim.SetFloat("speed",x);
+			anim.SetBool("move",true);
 			v=x;
 			rigidbody2D.velocity = new Vector2 (x * touzoku_speed, rigidbody2D.velocity.y);
 
@@ -71,6 +76,7 @@ public class Touzoku : MonoBehaviour {
 			Vector2 pos = transform.position;
 			transform.position = pos;
 		} else {
+			anim.SetBool("move",false);
 			rigidbody2D.velocity = new Vector2 (0, rigidbody2D.velocity.y);
 		}
 		Vector3 cameraPos = touzoku_mainCamera.transform.position;
@@ -81,11 +87,12 @@ public class Touzoku : MonoBehaviour {
 
 	void StoneSummon(){
 				// プレハブからインスタンスを生成
-				Vector2 pos = new Vector2(0,50);
+				Vector2 pos = transform.position;
+				pos.y+=50;
 				GameObject obj = (GameObject)Instantiate(stone, transform.position, Quaternion.identity);
 				// 作成したオブジェクトを子として登録
 				obj.transform.SetParent(transform, false);
-				obj.transform.localPosition=pos;
-				obj.GetComponent<Stone>().speed = 50*(v/Mathf.Abs(v));
+				obj.transform.position=pos;
+				obj.GetComponent<Stone>().speed = 10*(v/Mathf.Abs(v));
 	}
 }

@@ -25,6 +25,9 @@ public class Sharin : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Mathf.Approximately(Time.timeScale, 0f)) {
+			return;
+		}
 		Vector2 pos = transform.parent.transform.position;
 		pos.x+=(v*sharin_speed);
 		posX+=(v*sharin_speed);
@@ -44,8 +47,8 @@ public class Sharin : MonoBehaviour {
 				float rad = Mathf.Atan2(distance.x,distance.y);
 				GameObject obj = (GameObject)Instantiate(sharin_attack, transform.position, Quaternion.identity);
 				// 作成したオブジェクトを子として登録
-				obj.transform.SetParent(transform, false);
-				obj.transform.localPosition=new Vector2(0,0);
+				//obj.transform.SetParent(transform, false);
+				obj.transform.position=mypos;
 				obj.GetComponent<Sharin_attack>().SetTarget(rad);
 			}
 		}

@@ -54,6 +54,7 @@
      <Compile Include="Assets\script\Sharin.cs" />
      <Compile Include="Assets\script\Sharin_attack.cs" />
      <Compile Include="Assets\script\Stone.cs" />
+     <Compile Include="Assets\script\Talk_Event.cs" />
      <Compile Include="Assets\script\Tama.cs" />
      <Compile Include="Assets\script\Touzoku.cs" />
  <Reference Include="UnityEngine.UI">

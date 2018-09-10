@@ -18,6 +18,9 @@ public class Koumori : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (Mathf.Approximately(Time.timeScale, 0f)) {
+			return;
+		}
 		Vector2 pos = transform.position;
 		pos.x+=(v*koumori_speed);
 		posX+=(v*koumori_speed);
