@@ -81,7 +81,7 @@ public class Touzoku : MonoBehaviour {
 		}
 		Vector3 cameraPos = touzoku_mainCamera.transform.position;
 		cameraPos.x = cameraPos.x + (cameraTarget.x-cameraPos.x)/20;
-		cameraPos.y = transform.position.y+150;
+		cameraPos.y = transform.position.y+50;
 		touzoku_mainCamera.transform.position = cameraPos;
 	}
 

@@ -30,7 +30,6 @@ public class Stone : MonoBehaviour {
 		}
 	}
 	void OnTriggerEnter2D(Collider2D other){
-		Debug.Log(other.gameObject.tag);
 		if(other.gameObject.tag=="Enemy"){
 			other.gameObject.GetComponent<Enemy>().Enemy_Damage(10);
 			Destroy(this.gameObject);
